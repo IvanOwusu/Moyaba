@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOYABA Nkrumah Neighborhood Stewardship Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232e7d32'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-weight='bold'>M</text></svg>">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --tech-blue: #1565c0;
+            --light-bg: #f4f6f5;
+            --dark-text: #2c3e50;
+            --accent-orange: #e67e22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            color: var(--tech-blue);
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 48, 90, 0.85) 0%, rgba(20, 70, 30, 0.85) 100%), url('https://picsum.photos/seed/moyaba/1920/1080') center/cover;
+            color: white;
+            padding: 140px 5%; 
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        /* Conceptual Model Grid */
+        .model-section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px; 
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            padding: 0; 
+            border: none;
+            border-bottom: 4px solid var(--primary-green);
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .card-image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.1); 
+        }
+
+        .card-body {
+            padding: 30px;
+            flex: 1;
+        }
+
+        .card.tech { border-bottom-color: var(--tech-blue); }
+        .card.vocational { border-bottom-color: var(--accent-orange); }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* News Section */
+        .news-section {
+            background: white;
+            padding: 80px 5%;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            color: var(--primary-green);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            transition: box-shadow 0.2s;
+        }
+        
+        .news-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .news-tag {
+            font-size: 0.8rem;
+            background: var(--tech-blue);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Contact & Social Integration Styles */
+        .contact-section {
+            padding: 60px 5%;
+            text-align: center;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+        .contact-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 30px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .btn-whatsapp { background: #25D366; }
+        .btn-email { background: var(--accent-orange); }
+        .btn-linkedin { background: #0077b5; }
+
+        /* Chatbot Interface */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            display: none;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--tech-blue);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background: #e3f2fd;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background: var(--primary-green);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: var(--tech-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                padding: 1rem 5%;
+            }
+
+            .hero {
+                padding: 80px 5%;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .chat-window {
+                width: calc(100vw - 60px);
+                right: 0;
+                bottom: 80px;
+            }
+
+            .chat-widget {
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-btn {
+                width: 80%;
+                justify-content: center;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .news-section h2,
+            .model-section h2,
+            .contact-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiMyZTdkMzIiPjwvc3ZnPg==" alt="MOYABA circular green logo" class="logo-img">
+            <div class="logo-text">MOYABA <span>NKRUMAH</span></div>
+        </div>
+        <div style="font-weight: 600; color: var(--tech-blue);">Neighborhood Stewardship Hub</div>
+    </nav>
+
+    <header class="hero">
+        <h1>Walk The Talk</h1>
+        <p>In the heart of Africa's green renaissance, MOYABA unites human-machine intelligence with ancestral wisdom. We transform backyard gardens into micro-climate laboratories, fostering community resilience and food security.</p>
+    </header>
+
+    <section class="model-section">
+        <h2>Ecosystem of Transformation</h2>
+        <div class="grid-container">
+            <div class="card tech">
+                <div class="card-image-container">
+                    <img src="https://picsum.photos/seed/tech/800/500" alt="Digital network and cloud computing infrastructure visualization" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3>AI Anticipation & Digital Infrastructure</h3>
+                    <p>Empowering neighborhoods with adaptive algorithms. Our end-to-end cloud infrastructure seamlessly integrates immersive training with daily operations and predictive analytics.</p>
+                </div>
+            </div>
+            <div class="card vocational">
+                <div class="card-image-container">
+                    <img src="https://picsum.photos/seed/agri/800/500" alt="Vibrant farmland and agricultural training session" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3>Field-First Mixed-Reality Learning</h3>
+                    <p>Bridging the gap between classroom and soil. We accelerate vocational mastery through immersive, real-world tasks and AI-assisted education.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="https://picsum.photos/seed/people/800/500" alt="Community members working together in a green economy initiative" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3>Green-Economy Livelihoods</h3>
+                    <p>Demystifying green technology to transform agriculture into dignified engines of livelihood and economic empowerment for all, including the vulnerable and disabled.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <h2>Daily Updates: Tech, Agri & Climate</h2>
+        <div class="news-grid" id="news-container">
+            </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Connect With Our Leadership</h2>
+        <div class="social-links">
+            <a href="https://wa.me/233559546750" target="_blank" rel="noopener noreferrer" class="social-btn btn-whatsapp">
+                💬 WhatsApp
+            </a>
+            <a href="mailto:kweku.enyan@live.com" class="social-btn btn-email">
+                ✉️ Email Us
+            </a>
+            <a href="https://www.linkedin.com/in/patrick-kweku-enyan-64b21b17/" target="_blank" rel="noopener noreferrer" class="social-btn btn-linkedin">
+                🔗 LinkedIn
+            </a>
+        </div>
+    </section>
+
+    <div class="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()" aria-label="Open chat">💬</button>
+        <div class="chat-window" id="chatWindow" style="display:none">
+            <div class="chat-header">
+                MOYABA AI Steward
+                <span style="cursor:pointer" onclick="toggleChat()" aria-label="Close chat">✖</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-message bot-message">
+                    Akwaaba! I am your MOYABA digital agent. How can I assist you with sustainable farming, tech insights, or vocational training today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask about climate, agriculture..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const newsData = [
+                { tag: "AgriTech", title: "Ghana's Precision Farming Revolution", excerpt: "New sensor networks are helping local farmers increase crop yields while conserving water." },
+                { tag: "Climate", title: "Micro-Climate Labs Show Promise", excerpt: "Backyard adaptations in local neighborhoods are reducing ambient temperatures by 2°C." },
+                { tag: "AI / Tech", title: "AI Agents Streamline Health Centers", excerpt: "Digital assistants are now summarizing doctors' notes, significantly improving patient consultation histories." }
+            ];
+
+            function loadNews() {
+                const container = document.getElementById('news-container');
+                newsData.forEach(news => {
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+
+                    const tag = document.createElement('span');
+                    tag.className = 'news-tag';
+                    tag.textContent = news.tag;
+
+                    const title = document.createElement('h3');
+                    title.style.cssText = 'margin: 15px 0 10px;';
+                    title.textContent = news.title;
+
+                    const excerpt = document.createElement('p');
+                    excerpt.style.cssText = 'font-size: 0.9rem; color: #555;';
+                    excerpt.textContent = news.excerpt;
+
+                    card.appendChild(tag);
+                    card.appendChild(title);
+                    card.appendChild(excerpt);
+                    container.appendChild(card);
+                });
+            }
+
+            function toggleChat() {
+                const chatWindow = document.getElementById('chatWindow');
+                const isVisible = chatWindow.style.display === 'flex';
+                chatWindow.style.display = isVisible ? 'none' : 'flex';
+            }
+
+            function sendMessage() {
+                const input = document.getElementById('userInput');
+                const message = input.value.trim();
+                if (!message) return;
+
+                const chatBody = document.getElementById('chatBody');
+
+                // User message - safe DOM creation
+                const userMsg = document.createElement('div');
+                userMsg.className = 'chat-message user-message';
+                userMsg.textContent = message;
+                chatBody.appendChild(userMsg);
+                input.value = '';
+
+                // Bot response after 1 second
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'chat-message bot-message';
+                    botMsg.textContent = 'I am a demonstration interface right now. Connect me to an AI API to process inquiries regarding "' + message + '".';
+                    chatBody.appendChild(botMsg);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000);
+
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            function handleKeyPress(e) {
+                if (e.key === 'Enter') sendMessage();
+            }
+
+            // Expose functions to global scope
+            window.toggleChat = toggleChat;
+            window.sendMessage = sendMessage;
+            window.handleKeyPress = handleKeyPress;
+
+            document.addEventListener('DOMContentLoaded', loadNews);
+        })();
+    </script>
+</body>
+</html>
